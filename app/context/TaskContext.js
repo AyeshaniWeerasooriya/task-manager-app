@@ -1,6 +1,12 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { collection, addDoc, onSnapshot, query, where } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import { useAuth } from "./AuthContext";
 
@@ -15,7 +21,10 @@ export const TaskProvider = ({ children }) => {
 
     const q = query(collection(db, "tasks"), where("uid", "==", user.uid));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const tasksData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const tasksData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setTasks(tasksData);
       console.log("Fetched tasks from Firestore:", tasksData);
     });
@@ -29,7 +38,7 @@ export const TaskProvider = ({ children }) => {
     await addDoc(collection(db, "tasks"), {
       text,
       uid: user.uid,
-      createdAt: new Date()
+      createdAt: new Date(),
     });
   };
 

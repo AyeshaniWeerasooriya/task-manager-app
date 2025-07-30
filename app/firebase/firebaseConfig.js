@@ -14,7 +14,7 @@ const firebaseConfig = {
   storageBucket: "task-manager-1c664.firebasestorage.app",
   messagingSenderId: "912987859704",
   appId: "1:912987859704:web:c4f1a38aaca53f165aa90d",
-  measurementId: "G-DJX9772P7Q"
+  measurementId: "G-DJX9772P7Q",
 };
 
 // Initialize Firebase

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { Button } from "@components/ui/button"
+import { Button } from "@components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -10,18 +10,23 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/app/components/ui/dropdown-menu"
-import { ChevronDown } from "lucide-react"
+} from "@/app/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
-export function DropdownMenuCheckboxes({triggerClassName = "" , buttonName = "" }) {
-  const [showStatusBar, setShowStatusBar] = React.useState(true)
-  const [showActivityBar, setShowActivityBar] = React.useState(false)
-  const [showPanel, setShowPanel] = React.useState(false)
+export function DropdownMenuCheckboxes({
+  triggerClassName = "",
+  buttonName = "",
+}) {
+  const [showStatusBar, setShowStatusBar] = React.useState(true);
+  const [showActivityBar, setShowActivityBar] = React.useState(false);
+  const [showPanel, setShowPanel] = React.useState(false);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-         <Button variant="outline" className={triggerClassName}>{buttonName}</Button>    
+        <Button variant="outline" className={triggerClassName}>
+          {buttonName}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
@@ -47,5 +52,5 @@ export function DropdownMenuCheckboxes({triggerClassName = "" , buttonName = "" 
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

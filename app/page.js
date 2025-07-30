@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -12,9 +11,9 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 export default function Home() {
   const { user } = useAuth();
   const router = useRouter();
-  const [tasks,setTasks] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (!user) {
       router.replace("/login");
     }
@@ -28,23 +27,21 @@ export default function Home() {
     });
 
     return () => unsubscribe();
-  
   }, [user, router]);
 
-    if (!user) {
-      return null;
-    }
-    
+  if (!user) {
+    return null;
+  }
+
   return (
-  <main className="min-h-screen w-full bg-gradient-to-br from-gray-900 to-purple-700 px-4 sm:px-6 py-10">
-  <div className="max-w-3xl mx-auto w-full">
-    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 border-b pb-6">
-      <h1 className="text-white text-3xl sm:text-4xl font-bold text-center sm:text-left">
-        Get things done.
-      </h1>
-      <DialogBox/>
-    </div>
-    {/* <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+    <div className="max-w-3xl mx-auto w-full py-10">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 border-b pb-6">
+        <h1 className="text-white text-3xl sm:text-4xl font-bold text-center sm:text-left">
+          Get things done.
+        </h1>
+        <DialogBox />
+      </div>
+      {/* <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
       <input
         type="text"
         placeholder="Search..."
@@ -55,21 +52,13 @@ export default function Home() {
         buttonName="Apply Filters"
       />
     </div> */}
-    <div>
+      <div>
         {tasks.length === 0 ? (
-           <p className="text-white text-center">No tasks yet.</p>
-        ): (
-          tasks.map((task)=>(
-            <TaskList
-              key={task.id}
-              task={task}
-            />
-          ))
+          <p className="text-white text-center">No tasks yet.</p>
+        ) : (
+          tasks.map((task) => <TaskList key={task.id} task={task} />)
         )}
+      </div>
     </div>
-
-  </div>
-</main>
-
   );
 }

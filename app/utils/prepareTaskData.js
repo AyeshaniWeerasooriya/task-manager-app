@@ -2,11 +2,18 @@
 import { getNextDueDate } from "./dateUtils";
 
 export function prepareTaskData({ title, description, userId }) {
-  const tags = [...description.matchAll(/#\w+/g)].map(m => m[0].toLowerCase());
+  const tags = [...description.matchAll(/#\w+/g)].map((m) =>
+    m[0].toLowerCase()
+  );
 
   const weekdays = {
-    sunday: 0, monday: 1, tuesday: 2, wednesday: 3,
-    thursday: 4, friday: 5, saturday: 6
+    sunday: 0,
+    monday: 1,
+    tuesday: 2,
+    wednesday: 3,
+    thursday: 4,
+    friday: 5,
+    saturday: 6,
   };
 
   let dueDate = new Date(); // fallback default
@@ -23,7 +30,7 @@ export function prepareTaskData({ title, description, userId }) {
   }
 
   // === 2. Repeatable hashtags (only one allowed for now)
-  const repeatTags = tags.filter(t => t.startsWith("#every"));
+  const repeatTags = tags.filter((t) => t.startsWith("#every"));
 
   if (repeatTags.length > 0) {
     isRepeatable = true;
@@ -64,7 +71,9 @@ export function prepareTaskData({ title, description, userId }) {
     dueDate: dueDate.toISOString(),
     isRepeatable,
     repeatRule,
-    tags: tags.filter(t => !t.startsWith("#every") && t !== "#today" && t !== "#tomorrow"),
+    tags: tags.filter(
+      (t) => !t.startsWith("#every") && t !== "#today" && t !== "#tomorrow"
+    ),
     userId,
   };
 }

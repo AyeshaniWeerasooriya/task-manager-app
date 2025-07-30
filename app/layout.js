@@ -23,9 +23,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       <AuthProvider>
-          <TaskProvider>{children}</TaskProvider>
-        </AuthProvider>
+        <main className="min-h-screen w-full bg-gradient-to-br from-gray-900 to-purple-700 px-4 sm:px-6 ">
+          <AuthProvider>
+            <TaskProvider>{children}</TaskProvider>
+          </AuthProvider>
+        </main>
       </body>
     </html>
   );

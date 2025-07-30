@@ -1,4 +1,4 @@
-import { Button } from "@components/ui/button"
+import { Button } from "@components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,58 +8,55 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/app/components/ui/dialog"
-import { Input } from "@components/ui/input"
-import { Label } from "@components/ui/label"
-import { Textarea } from "./ui/textarea"
-import { Plus } from "lucide-react"
-import { useState } from "react"
-import { addDoc, collection, Timestamp } from "firebase/firestore"
-import { auth, db } from "../firebase/firebaseConfig"
-import { prepareTaskData } from "../utils/prepareTaskData"
+} from "@/app/components/ui/dialog";
+import { Input } from "@components/ui/input";
+import { Label } from "@components/ui/label";
+import { Textarea } from "./ui/textarea";
+import { Plus } from "lucide-react";
+import { useState } from "react";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { auth, db } from "../firebase/firebaseConfig";
+import { prepareTaskData } from "../utils/prepareTaskData";
 
 export function DialogBox() {
-    const[title,setTitle] = useState("");
-    const[description,setDescription] = useState("");
-    const[open,setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [open, setOpen] = useState(false);
 
-    
-const user = auth.currentUser;
+  const user = auth.currentUser;
 
-
-
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!title|| !description) return;
+    if (!title || !description) return;
     console.log("Submitting Task:", { title, description });
 
-  
-    try{
+    try {
       const userId = user.uid;
       const task = prepareTaskData({ title, description, userId });
-        await addDoc(collection(db,"task"),task);
-        setTitle("");
-        setDescription("");
-        setOpen(false);
-    }catch(error){
-        console.error("Error adding task: ", error);
-        alert("Something went wrong")
+      await addDoc(collection(db, "task"), task);
+      setTitle("");
+      setDescription("");
+      setOpen(false);
+    } catch (error) {
+      console.error("Error adding task: ", error);
+      alert("Something went wrong");
     }
-
-};
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
+      <DialogTrigger asChild>
         <Button variant="outline" className="font-bold">
-        <Plus className="h-5 w-5 text-black font-bold" />
-         Create Task
-        </Button>   
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+          <Plus className="h-5 w-5 text-black font-bold" />
+          Create Task
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold mb-2">Create a new task</DialogTitle>
+            <DialogTitle className="text-2xl font-bold mb-2">
+              Create a new task
+            </DialogTitle>
             <DialogDescription>
               Provide information about the task you wish to complete
             </DialogDescription>
@@ -67,37 +64,38 @@ const handleSubmit = async (e) => {
           <div className="grid gap-4 mt-5">
             <div className="grid gap-3">
               <Label htmlFor="title">Task Title</Label>
-              <Input 
-              id="title" 
-              name="title"
-              value={title}
-              onChange={(e)=> setTitle(e.target.value)}
-               />
+              <Input
+                id="title"
+                name="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="description">Task Description</Label>
-              <Textarea 
-                    id="description"
-                    required
-                    value={description}
-                    className="rounded-sm min-h-[100px]"
-                    onChange={(e)=>setDescription(e.target.value)} 
-                />
+              <Textarea
+                id="description"
+                required
+                value={description}
+                className="rounded-sm min-h-[100px]"
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </div>
           </div>
           <DialogFooter className="mt-3">
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button  type="submit"
-                className=" text-white bg-blue-900 rounded-sm"
-                onSubmit={() => setOpen(true)}
+            <Button
+              type="submit"
+              className=" text-white bg-blue-900 rounded-sm"
+              onSubmit={() => setOpen(true)}
             >
-                    Create Task
+              Create Task
             </Button>
           </DialogFooter>
-          </form>
-        </DialogContent>
+        </form>
+      </DialogContent>
     </Dialog>
-  )
+  );
 }

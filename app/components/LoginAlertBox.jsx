@@ -77,9 +77,7 @@ export default function LoginCard() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {errorMsg && (
-                <p className="text-red-500 text-sm">{errorMsg}</p>
-              )}
+              {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
             </div>
           </form>
         </CardContent>
@@ -95,11 +93,14 @@ export default function LoginCard() {
           </Button>
           <div className=" w-full flex items-center justify-center gap-1 text-xs ">
             <p className="text-muted-foreground">DON'T HAVE AN ACCOUNT</p>
-            <Button className="p-0 h-auto text-xs" variant="link" onClick={() => router.push("/register")}>
+            <Button
+              className="p-0 h-auto text-xs"
+              variant="link"
+              onClick={() => router.push("/register")}
+            >
               SiGN UP NOW
             </Button>
           </div>
-
         </CardFooter>
       </Card>
     </div>
