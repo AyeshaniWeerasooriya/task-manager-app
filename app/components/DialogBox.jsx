@@ -15,8 +15,8 @@ import { Textarea } from "./ui/textarea";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { auth, db } from "../firebase/firebaseConfig";
-import { prepareTaskData } from "../utils/prepareTaskData";
+import { auth, db } from "@firebase/firebaseConfig";
+import { prepareTaskData } from "@utils/prepareTaskData";
 
 export function DialogBox() {
   const [title, setTitle] = useState("");
@@ -25,7 +25,7 @@ export function DialogBox() {
 
   const user = auth.currentUser;
 
-  const handleSubmit = async (e) => {
+  const handleNewRecord = async (e) => {
     e.preventDefault();
     if (!title || !description) return;
     console.log("Submitting Task:", { title, description });
@@ -52,7 +52,7 @@ export function DialogBox() {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleNewRecord}>
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold mb-2">
               Create a new task
@@ -89,8 +89,7 @@ export function DialogBox() {
             <Button
               type="submit"
               className=" text-white bg-blue-900 rounded-sm"
-              onSubmit={() => setOpen(true)}
-            >
+              onSubmit={() => setOpen(true)}>
               Create Task
             </Button>
           </DialogFooter>
