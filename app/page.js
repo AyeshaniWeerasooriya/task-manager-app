@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@context/AuthContext";
 import { db } from "@firebase/firebaseConfig";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { TaskDialogBox } from "@components/TaskDialogBox";
 import TaskView from "@components/TaskView";
 import { ScrollArea } from "@components/ui/scroll-area";
@@ -16,8 +22,16 @@ export default function Home() {
   useEffect(() => {
     if (!user) {
       router.replace("/login");
+      return;
     }
-    const q = query(collection(db, "task"), orderBy("createdAt", "desc"));
+
+    const q = query(
+      collection(db, "task"),
+      // Filter tasks where userId matches current user
+      where("userId", "==", user.uid),
+      orderBy("createdAt", "desc")
+    );
+
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const tasksData = snapshot.docs.map((doc) => ({
         id: doc.id,

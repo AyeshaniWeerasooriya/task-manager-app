@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardTitle,
-} from "@components/ui/card";
+import { Card, CardContent, CardTitle } from "@components/ui/card";
 import { Button } from "@components/ui/button";
 import { Trash2 } from "lucide-react";
 import { deleteDoc, doc } from "firebase/firestore";
@@ -37,7 +33,7 @@ export default function TaskView({ task }) {
     <Card className="w-full max-w-[800px] rounded-sm px-5 pt-1 relative mb-5 overflow-hidden bg-white/10 shadow-xl backdrop-blur-sm border border-white/20">
       <div className="grid grid-cols-2 gap-4 mb-2 mt-3">
         <div className="col-span-1 pr-4">
-          <CardTitle className="text-lg break-words whitespace-normal leading-snug bg font-semibold text-white" >
+          <CardTitle className="text-lg break-words whitespace-normal leading-snug bg font-semibold text-white">
             {title}
           </CardTitle>
         </div>
@@ -50,15 +46,17 @@ export default function TaskView({ task }) {
                 <span className="ml-2 text-xs italic text-yellow-500">
                   (Repeats{" "}
                   {task.repeatRule.type === "weekly"
-                    ? `every ${[
-                      "Sunday",
-                      "Monday",
-                      "Tuesday",
-                      "Wednesday",
-                      "Thursday",
-                      "Friday",
-                      "Saturday",
-                    ][task.repeatRule.dayOfWeek]}`
+                    ? `every ${
+                        [
+                          "Sunday",
+                          "Monday",
+                          "Tuesday",
+                          "Wednesday",
+                          "Thursday",
+                          "Friday",
+                          "Saturday",
+                        ][task.repeatRule.dayOfWeek]
+                      }`
                     : task.repeatRule.type}
                   )
                 </span>
@@ -80,9 +78,9 @@ export default function TaskView({ task }) {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute bottom-2 right-5 bg-purple-900/20"
+            className="absolute bottom-2 right-5"
           >
-            <Trash2 className="h-5 w-5 text-red-900" />
+            <Trash2 className="h-5 w-5 text-gray-400" />
           </Button>
         }
       />
