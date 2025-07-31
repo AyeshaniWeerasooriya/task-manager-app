@@ -8,7 +8,8 @@
       "@hooks/*": ["hooks/*"],
       "@ui/*": ["app/components/ui/*"],
       "@utils/*": ["app/utils/*"],
-      "@firebase/*": ["app/firebase/*"]
+      "@firebase/*": ["app/firebase/*"],
+      "@context/*": ["app/context/*"]
     }
   }
 }

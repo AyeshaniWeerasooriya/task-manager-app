@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext"; // adjust path if needed
-import LoginAlertBox from "@components/LoginAlertBox";
+import LoginDialogBox from "@components/LoginDialogBox";
 
 export default function LoginPage() {
   const { user } = useAuth();
@@ -19,5 +19,5 @@ export default function LoginPage() {
     return null;
   }
 
-  return <LoginAlertBox />;
+  return <LoginDialogBox />;
 }

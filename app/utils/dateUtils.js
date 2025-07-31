@@ -22,15 +22,14 @@ export function getNextDueDate(recurrenceType, options = {}) {
       break;
 
     case "yearly":
-      const { month = today.getMonth(), day = today.getDate() } =
-        options.monthDay ?? {};
-      nextDate.setFullYear(today.getFullYear() + 1);
+      const { month = today.getMonth(), day = today.getDate() } = options;
       nextDate.setMonth(month);
       nextDate.setDate(day);
-      break;
 
-    default:
-      throw new Error("Unknown recurrence type");
+      if (nextDate < today) {
+        nextDate.setFullYear(today.getFullYear() + 1);
+      }
+      break;
   }
 
   nextDate.setHours(0, 0, 0, 0);

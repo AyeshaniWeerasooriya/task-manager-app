@@ -2,9 +2,8 @@
 import { getNextDueDate } from "./dateUtils";
 
 export function prepareTaskData({ title, description, userId }) {
-  const tags = [...description.matchAll(/#\w+/g)].map((m) =>
-    m[0].toLowerCase()
-  );
+  const allText = `${title} ${description}`;
+  const tags = [...allText.matchAll(/#\w+/g)].map((m) => m[0].toLowerCase());
 
   const weekdays = {
     sunday: 0,
@@ -14,6 +13,21 @@ export function prepareTaskData({ title, description, userId }) {
     thursday: 4,
     friday: 5,
     saturday: 6,
+  };
+
+  const monthNames = {
+    jan: 0,
+    feb: 1,
+    mar: 2,
+    apr: 3,
+    may: 4,
+    jun: 5,
+    jul: 6,
+    aug: 7,
+    sep: 8,
+    oct: 9,
+    nov: 10,
+    dec: 11,
   };
 
   let dueDate = new Date(); // fallback default
@@ -58,8 +72,15 @@ export function prepareTaskData({ title, description, userId }) {
         break;
       }
 
-      if (/^jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec/.test(value)) {
-        // Optional: implement yearly logic based on #everyjan1st or similar
+      const match = value.match(
+        /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)(\d{1,2})(st|nd|rd|th)?$/
+      );
+      if (match) {
+        const month = monthNames[match[1]];
+        const day = parseInt(match[2]);
+        dueDate = getNextDueDate("yearly", { month, day });
+        repeatRule = { type: "yearly", month, day };
+        break;
       }
     }
   }

@@ -11,14 +11,14 @@ import {
 } from "@/app/components/ui/dialog";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "@components/ui/textarea";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { auth, db } from "@firebase/firebaseConfig";
 import { prepareTaskData } from "@utils/prepareTaskData";
 
-export function DialogBox() {
+export function TaskDialogBox() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [open, setOpen] = useState(false);

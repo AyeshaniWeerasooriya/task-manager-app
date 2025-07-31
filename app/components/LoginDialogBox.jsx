@@ -2,8 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebaseConfig";
-
+import { auth } from "@firebase/firebaseConfig";
 import { Button } from "@components/ui/button";
 import {
   Card,
@@ -17,7 +16,7 @@ import {
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 
-export default function LoginCard() {
+export default function LoginDialogBox() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");

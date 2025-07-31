@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "./context/AuthContext";
-import TaskList from "./components/TaskList";
-import { DropdownMenuCheckboxes } from "./components/DropDown";
-import { DialogBox } from "./components/DialogBox";
-import { db } from "./firebase/firebaseConfig";
+import { useAuth } from "@context/AuthContext";
+import { db } from "@firebase/firebaseConfig";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { TaskDialogBox } from "@components/TaskDialogBox";
+import TaskView from "@components/TaskView";
+import { ScrollArea } from "@components/ui/scroll-area";
 
 export default function Home() {
   const { user } = useAuth();
@@ -39,26 +39,17 @@ export default function Home() {
         <h1 className="text-white text-3xl sm:text-4xl font-bold text-center sm:text-left">
           Get things done.
         </h1>
-        <DialogBox />
+        <TaskDialogBox />
       </div>
-      {/* <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
-      <input
-        type="text"
-        placeholder="Search..."
-        className="bg-white/20 text-white px-4 py-2 rounded-sm w-full sm:w-2/3 outline-none backdrop-blur-md"
-      />
-      <DropdownMenuCheckboxes
-        triggerClassName="bg-white/30 backdrop-blur-md text-white border-0 hover:text-black w-full sm:w-auto"
-        buttonName="Apply Filters"
-      />
-    </div> */}
-      <div>
-        {tasks.length === 0 ? (
-          <p className="text-white text-center">No tasks yet.</p>
-        ) : (
-          tasks.map((task) => <TaskList key={task.id} task={task} />)
-        )}
-      </div>
+      <ScrollArea className=" w-full h-[78vh]">
+        <div className="p-4 pr-4">
+          {tasks.length === 0 ? (
+            <p className="text-white text-center">No tasks yet.</p>
+          ) : (
+            tasks.map((task) => <TaskView key={task.id} task={task} />)
+          )}
+        </div>
+      </ScrollArea>
     </div>
   );
 }
