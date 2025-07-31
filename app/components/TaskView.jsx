@@ -33,14 +33,13 @@ export default function TaskView({ task }) {
     <Card className="w-full max-w-[800px] rounded-sm px-5 pt-1 relative mb-5 overflow-hidden bg-white/10 shadow-xl backdrop-blur-sm border border-white/20">
       <div className="grid grid-cols-2 gap-4 mb-2 mt-3">
         <div className="col-span-1 pr-4">
-          <CardTitle className="text-lg break-words whitespace-normal leading-snug bg font-semibold text-white">
+          <CardTitle className="text-lg break-words whitespace-normal leading-snug bg font-semibold text-purple-300">
             {title}
           </CardTitle>
         </div>
         <div className="col-span-1 text-right">
           {task.dueDate && (
-            <p className="text-sm italic  text-blue-400 mt-1 break-words whitespace-normal">
-              {/* 📅 Next Due: {formatDate(task.dueDate)} */}
+            <p className="text-sm italic  text-blue-400  break-words whitespace-normal">
               Next Due: {formatDate(task.dueDate)}
               {task.isRepeatable && task.repeatRule?.type && (
                 <span className="ml-2 text-xs italic text-yellow-500">
@@ -66,7 +65,7 @@ export default function TaskView({ task }) {
         </div>
         <div className="col-span-2 pr-4">
           <CardContent className="w-full px-0">
-            <p className="text-sm/6 text-left break-words whitespace-pre-wrap leading-snug text-white">
+            <p className="text-sm/6 text-left break-words whitespace-pre-wrap leading-snug text-white ">
               {description}
             </p>
           </CardContent>
@@ -78,7 +77,7 @@ export default function TaskView({ task }) {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute bottom-2 right-5"
+            className="absolute bottom-2 right-5 "
           >
             <Trash2 className="h-5 w-5 text-gray-400" />
           </Button>

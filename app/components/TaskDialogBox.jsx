@@ -9,10 +9,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/app/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@components/ui/tooltip";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { Textarea } from "@components/ui/textarea";
-import { Plus } from "lucide-react";
+import { Lightbulb, Plus } from "lucide-react";
 import { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { auth, db } from "@firebase/firebaseConfig";
@@ -54,16 +59,37 @@ export function TaskDialogBox() {
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleNewRecord}>
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold mb-2">
-              Create a new task
-            </DialogTitle>
+            <div className="flex gap-2 ">
+              <DialogTitle className="text-2xl font-bold mb-2">
+                Create a new task
+              </DialogTitle>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Lightbulb className="w-5 h-5 text-yellow-400 mt-1.5" />
+                </TooltipTrigger>
+                <TooltipContent className="bg-black max-w-2xs">
+                  <p className="text-white text-center font-semibold leading-5">
+                    Use{" "}
+                    <span className="font-semibold text-blue-600">#tags</span>{" "}
+                    to smartly organize your tasks
+                    <br />
+                    <span className="text-blue-600 ">#today</span>{" "}
+                    <span className="text-blue-600 ">#tomorrow</span>{" "}
+                    <span className="text-blue-600">#everyday</span>{" "}
+                    <span className="text-blue-600">#everymonday</span>{" "}
+                    <span className="text-blue-600">#every15th</span>{" "}
+                    <span className="text-blue-600">#everyjan1st</span>{" "}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <DialogDescription>
               Provide information about the task you wish to complete
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 mt-5">
             <div className="grid gap-3">
-              <Label htmlFor="title">Task Title</Label>
+              <Label htmlFor="title">Task</Label>
               <Input
                 id="title"
                 name="title"
@@ -72,7 +98,7 @@ export function TaskDialogBox() {
               />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="description">Task Description</Label>
+              <Label htmlFor="description">Note</Label>
               <Textarea
                 id="description"
                 required
@@ -89,7 +115,8 @@ export function TaskDialogBox() {
             <Button
               type="submit"
               className=" text-white bg-blue-900 rounded-sm"
-              onSubmit={() => setOpen(true)}>
+              onSubmit={() => setOpen(true)}
+            >
               Create Task
             </Button>
           </DialogFooter>
