@@ -17,11 +17,13 @@ import Image from "next/image";
 import { LogOut } from "lucide-react";
 import { Button } from "./components/ui/button";
 import { getAuth, signOut } from "firebase/auth";
+import Spinner from "./components/Spinner";
 
 export default function Home() {
   const { user } = useAuth();
   const router = useRouter();
   const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -41,12 +43,16 @@ export default function Home() {
         ...doc.data(),
       }));
       setTasks(tasksData);
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, [user, router]);
 
+  if (loading) return <Spinner />;
+
   const handleLogout = async () => {
+    setLoading(true);
     const auth = getAuth();
     try {
       await signOut(auth);
@@ -68,7 +74,11 @@ export default function Home() {
         </h1>
         <div className="flex items-center gap-4">
           <TaskDialogBox />
-          <LogOut className=" text-white w-5 h-5" onClick={handleLogout} />
+          {loading ? (
+            <Spinner />
+          ) : (
+            <LogOut className=" text-white w-5 h-5" onClick={handleLogout} />
+          )}
         </div>
       </div>
       <ScrollArea className=" w-full h-[78vh]">

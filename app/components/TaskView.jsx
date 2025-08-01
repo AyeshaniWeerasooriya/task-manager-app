@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardTitle } from "@components/ui/card";
 import { Button } from "@components/ui/button";
 import { Trash2 } from "lucide-react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@firebase/firebaseConfig";
 import AlertDialogBox from "@components/AlertDialogBox";
+import Spinner from "./Spinner";
 
 export default function TaskView({ task }) {
   const { id, title, description } = task;
 
+  const [loading, setLoading] = useState(false);
+
   const handleDelete = async () => {
+    setLoading(true);
     try {
       await deleteDoc(doc(db, "task", id));
       console.log("Task deleted:", id);
@@ -79,7 +83,11 @@ export default function TaskView({ task }) {
             size="icon"
             className="absolute bottom-2 right-5 "
           >
-            <Trash2 className="h-5 w-5 text-gray-400" />
+            {loading ? (
+              <Spinner />
+            ) : (
+              <Trash2 className="h-5 w-5 text-gray-400" />
+            )}
           </Button>
         }
       />

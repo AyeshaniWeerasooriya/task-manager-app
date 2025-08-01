@@ -22,34 +22,47 @@ import { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { auth, db } from "@firebase/firebaseConfig";
 import { prepareTaskData } from "@utils/prepareTaskData";
+import Spinner from "./Spinner";
 
 export function TaskDialogBox() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const user = auth.currentUser;
 
   const handleNewRecord = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!title || !description) return;
-    console.log("Submitting Task:", { title, description });
-
     try {
       const userId = user.uid;
       const task = prepareTaskData({ title, description, userId });
       await addDoc(collection(db, "task"), task);
+      setLoading(false);
+      setOpen(false);
       setTitle("");
       setDescription("");
-      setOpen(false);
     } catch (error) {
       console.error("Error adding task: ", error);
       alert("Something went wrong");
+      setLoading(false);
     }
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(isOpen) => {
+        setOpen(isOpen);
+        if (!isOpen) {
+          setLoading(false);
+          setTitle("");
+          setDescription("");
+        }
+      }}
+    >
       <DialogTrigger asChild>
         <Button variant="outline" className="font-bold">
           <Plus className="h-5 w-5 text-black font-bold" />
@@ -115,9 +128,8 @@ export function TaskDialogBox() {
             <Button
               type="submit"
               className=" text-white bg-blue-900 rounded-sm"
-              onSubmit={() => setOpen(true)}
             >
-              Create Task
+              {loading ? <Spinner /> : "Create Task"}
             </Button>
           </DialogFooter>
         </form>

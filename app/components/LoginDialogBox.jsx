@@ -15,23 +15,31 @@ import {
 } from "@components/ui/card";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
+import Spinner from "./Spinner";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginDialogBox() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+    setLoading(true);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push("/"); // redirect to homepage
+      router.push("/");
     } catch (err) {
       setErrorMsg("Invalid login. Please check your credentials.");
       console.error("Login error:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,9 +61,8 @@ export default function LoginDialogBox() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
-                  className="rounded-sm"
-                  // placeholder="Username"
+                  placeholder="you@example.com"
+                  className="rounded-sm placeholder:text-xs"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -66,15 +73,28 @@ export default function LoginDialogBox() {
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                 </div>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  className="rounded-sm"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="rounded-sm pr-10 placeholder:text-xs"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <Button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 p-0 m-0 bg-transparent border-none outline-none hover:bg-transparent focus:ring-0"
+                  >
+                    {showPassword ? (
+                      <Eye className="w-5 h-5" />
+                    ) : (
+                      <EyeOff className="w-5 h-5" />
+                    )}
+                  </Button>
+                </div>
               </div>
               {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
             </div>
@@ -88,7 +108,7 @@ export default function LoginDialogBox() {
             type="submit"
             onClick={handleLogin}
           >
-            SIGN IN
+            {loading ? <Spinner /> : "SIGN IN"}
           </Button>
           <div className=" w-full flex items-center justify-center gap-1 text-xs ">
             <p className="text-muted-foreground">DON'T HAVE AN ACCOUNT</p>
