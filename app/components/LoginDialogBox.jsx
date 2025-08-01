@@ -55,7 +55,7 @@ export default function LoginDialogBox() {
 
         <CardContent>
           <form onSubmit={handleLogin}>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 ">
               <div className="grid gap-2">
                 <Label htmlFor="email">Username</Label>
                 <Input
@@ -97,7 +97,7 @@ export default function LoginDialogBox() {
 
               {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
 
-              <div className="mt-3">
+              <div className="mt-5">
                 <Button
                   variant="outline"
                   className="w-full text-white bg-blue-900 rounded-sm"
@@ -109,20 +109,6 @@ export default function LoginDialogBox() {
             </div>
           </form>
         </CardContent>
-
-        <CardFooter className="flex-col gap-2 mt-2">
-          <div className="w-full flex items-center justify-center gap-1 text-xs">
-            <p className="text-muted-foreground">DON'T HAVE AN ACCOUNT</p>
-            <Button
-              className="p-0 h-auto text-xs cursor-not-allowed"
-              variant="link"
-              disabled
-              onClick={() => router.push("/register")}
-            >
-              SIGN UP NOW
-            </Button>
-          </div>
-        </CardFooter>
       </Card>
     </div>
   );
