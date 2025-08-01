@@ -13,8 +13,8 @@ This app allows users to create, view and delete tasks .
 
 To test the app, use the following login:
 
-- Email: evaluator@test.com  
-- Password: 12345678
+- Email: user
+- Password: user@123
 
 ---
 
