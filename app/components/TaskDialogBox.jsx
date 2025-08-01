@@ -78,7 +78,7 @@ export function TaskDialogBox() {
               </DialogTitle>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Lightbulb className="w-5 h-5 text-yellow-400 mt-1.5" />
+                  <Lightbulb className="w-6 h-6 text-yellow-400 mt-1" />
                 </TooltipTrigger>
                 <TooltipContent className="bg-black max-w-2xs">
                   <p className="text-white text-center font-semibold leading-5">
@@ -106,6 +106,7 @@ export function TaskDialogBox() {
               <Input
                 id="title"
                 name="title"
+                required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -114,7 +115,6 @@ export function TaskDialogBox() {
               <Label htmlFor="description">Note</Label>
               <Textarea
                 id="description"
-                required
                 value={description}
                 className="rounded-sm min-h-[100px]"
                 onChange={(e) => setDescription(e.target.value)}

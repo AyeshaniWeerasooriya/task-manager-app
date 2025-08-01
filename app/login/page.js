@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../context/AuthContext"; // adjust path if needed
+import { useAuth } from "../context/AuthContext";
 import LoginDialogBox from "@components/LoginDialogBox";
 
 export default function LoginPage() {
@@ -10,11 +10,10 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      router.replace("/"); // Redirect to home if already logged in
+      router.replace("/");
     }
   }, [user, router]);
 
-  // While redirecting or if user exists, optionally render nothing
   if (user) {
     return null;
   }

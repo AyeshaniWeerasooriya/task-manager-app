@@ -23,13 +23,15 @@ export default function Home() {
   const { user } = useAuth();
   const router = useRouter();
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!user) {
       router.replace("/login");
       return;
     }
+
+    setLoading(true);
 
     const q = query(
       collection(db, "task"),
@@ -69,7 +71,7 @@ export default function Home() {
   return (
     <div className="max-w-3xl mx-auto w-full py-10">
       <div className="flex flex-col-3 sm:flex-row justify-between items-center gap-4 mb-8 border-b pb-6">
-        <h1 className="text-white text-3xl  font-bold text-center sm:text-left">
+        <h1 className="text-white text-3xl  font-semibold text-center sm:text-left">
           Get things done.
         </h1>
         <div className="flex items-center gap-4">
@@ -83,7 +85,11 @@ export default function Home() {
       </div>
       <ScrollArea className=" w-full h-[78vh]">
         <div className="p-4 pr-4">
-          {tasks.length === 0 ? (
+          {loading ? (
+            <div className="flex justify-center items-center h-40">
+              <Spinner />
+            </div>
+          ) : tasks.length === 0 ? (
             <div>
               <h4 className="text-white text-center mb-6 text-xl">
                 Your task list is empty
@@ -95,7 +101,6 @@ export default function Home() {
               />
             </div>
           ) : (
-            //
             tasks.map((task) => <TaskView key={task.id} task={task} />)
           )}
         </div>
