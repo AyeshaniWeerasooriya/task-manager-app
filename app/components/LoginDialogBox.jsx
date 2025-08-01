@@ -6,7 +6,6 @@ import { auth } from "@firebase/firebaseConfig";
 import { Button } from "@components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -37,7 +36,6 @@ export default function LoginDialogBox() {
       router.push("/");
     } catch (err) {
       setErrorMsg("Invalid login. Please check your credentials.");
-      console.error("Login error:", err);
     } finally {
       setLoading(false);
     }
@@ -70,9 +68,7 @@ export default function LoginDialogBox() {
               </div>
 
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
+                <Label htmlFor="password">Password</Label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -86,7 +82,7 @@ export default function LoginDialogBox() {
                   <Button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 p-0 m-0 bg-transparent border-none outline-none hover:bg-transparent focus:ring-0"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 p-0 m-0 bg-transparent border-none outline-none hover:bg-transparent focus:ring-0 cursor-pointer"
                   >
                     {showPassword ? (
                       <Eye className="w-5 h-5" />
@@ -96,28 +92,32 @@ export default function LoginDialogBox() {
                   </Button>
                 </div>
               </div>
+
               {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
+
+              <div className="mt-3">
+                <Button
+                  variant="outline"
+                  className="w-full text-white bg-blue-900 rounded-sm"
+                  type="submit"
+                >
+                  {loading ? <Spinner /> : "SIGN IN"}
+                </Button>
+              </div>
             </div>
           </form>
         </CardContent>
 
         <CardFooter className="flex-col gap-2 mt-2">
-          <Button
-            variant="outline"
-            className="w-full text-white bg-blue-900 rounded-sm"
-            type="submit"
-            onClick={handleLogin}
-          >
-            {loading ? <Spinner /> : "SIGN IN"}
-          </Button>
-          <div className=" w-full flex items-center justify-center gap-1 text-xs ">
+          <div className="w-full flex items-center justify-center gap-1 text-xs">
             <p className="text-muted-foreground">DON'T HAVE AN ACCOUNT</p>
             <Button
-              className="p-0 h-auto text-xs"
+              className="p-0 h-auto text-xs cursor-not-allowed"
               variant="link"
+              disabled
               onClick={() => router.push("/register")}
             >
-              SiGN UP NOW
+              SIGN UP NOW
             </Button>
           </div>
         </CardFooter>
