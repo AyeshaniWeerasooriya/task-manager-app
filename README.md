@@ -1,11 +1,11 @@
 # 📝 Task Management App
 
 A simple and efficient task management web application built with **Next.js**, **Firebase**, **Tailwind CSS**, and **ShadCN UI**.  
-This app allows users to create, view, repeat, and delete tasks using smart hashtags.
+This app allows users to create, view and delete tasks .
 
 ## Live Demo
 
-👉 [View Deployed App on Vercel](https://task-manager-app-eight-tau.vercel.app/login)  
+👉 [View Deployed App](https://task-manager-app-eight-tau.vercel.app/login)  
 👉 [GitHub Repository](https://github.com/AyeshaniWeerasooriya/task-manager-app)
 
 ---
