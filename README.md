@@ -13,7 +13,7 @@ This app allows users to create, view and delete tasks .
 
 To test the app, use the following login:
 
-- Username: user
+- Username: user@gmail.com
 - Password: user@123
 
 ---
