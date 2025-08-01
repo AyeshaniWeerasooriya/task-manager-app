@@ -5,7 +5,7 @@ This app allows users to create, view and delete tasks .
 
 ## Live Demo
 
-👉 [View Deployed App](https://task-manager-app-eight-tau.vercel.app/login)  
+👉 [Task Manager](https://task-manager-app-eight-tau.vercel.app/login)  
 
 ---
 
