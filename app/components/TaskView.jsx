@@ -86,7 +86,7 @@ export default function TaskView({ task }) {
             {loading ? (
               <Spinner />
             ) : (
-              <Trash2 className="h-5 w-5 text-gray-400" />
+              <Trash2 className="h-5 w-5 text-gray-300" />
             )}
           </Button>
         }
