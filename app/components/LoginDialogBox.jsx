@@ -45,7 +45,9 @@ export default function LoginDialogBox() {
     <div className="flex items-center justify-center min-h-screen">
       <Card className="w-full max-w-sm bg-white rounded-sm shadow-md">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold mb-2">Hello!</CardTitle>
+          <CardTitle className="text-3xl font-bold mb-2 text-center">
+            Hello!
+          </CardTitle>
           <CardDescription>
             Fill in your username and password to sign in
           </CardDescription>
@@ -59,7 +61,7 @@ export default function LoginDialogBox() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder="Username"
                   className="rounded-sm placeholder:text-xs"
                   required
                   value={email}
