@@ -55,13 +55,13 @@ export default function LoginDialogBox() {
 
         <CardContent>
           <form onSubmit={handleLogin}>
-            <div className="flex flex-col gap-3 ">
+            <div className="flex flex-col gap-3">
               <div className="grid gap-2">
-                <Label htmlFor="email">Username</Label>
+                <Label htmlFor="email">Username/ Email</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Username"
+                  placeholder="example@gmail.com"
                   className="rounded-sm placeholder:text-xs"
                   required
                   value={email}
@@ -97,7 +97,7 @@ export default function LoginDialogBox() {
 
               {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
 
-              <div className="mt-5">
+              <div className="mt-3">
                 <Button
                   variant="outline"
                   className="w-full text-white bg-blue-900 rounded-sm"
