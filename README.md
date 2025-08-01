@@ -9,6 +9,15 @@ This app allows users to create, view and delete tasks .
 
 ---
 
+## Test User Credentials
+
+To test the app, use the following login:
+
+- Email: evaluator@test.com  
+- Password: 12345678
+
+---
+
 ## Features
 
 -  **User Authentication** with Firebase
